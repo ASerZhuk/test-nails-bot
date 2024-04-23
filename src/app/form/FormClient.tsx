@@ -92,7 +92,7 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 
 	useEffect(() => {
 		const { firstName, lastName, price, phone } = formData
-		const allFieldsFilled = !(firstName && lastName && price && phone)
+		const allFieldsFilled = !!(firstName && lastName && price && phone)
 		setIsFormFilled(allFieldsFilled)
 	}, [formData])
 
