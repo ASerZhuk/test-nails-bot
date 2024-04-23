@@ -1,8 +1,10 @@
 import React from 'react'
 import { Checkbox } from 'antd'
 
-
-
+interface SelectProps {
+	onChange: (checkedValues: number[]) => void
+	value: number[]
+}
 
 const Select: React.FC<SelectProps> = ({ onChange, value }) => {
 	const options = [

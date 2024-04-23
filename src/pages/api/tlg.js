@@ -1,7 +1,7 @@
 import prisma from '@/app/libs/prismadb'
 import bot from '@/pages/api/bot'
 
-const webAppUrl = 'https://ea19-94-253-64-116.ngrok-free.app'
+const webAppUrl = process.env.WEB_URL_BOT
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
