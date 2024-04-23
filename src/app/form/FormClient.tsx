@@ -95,8 +95,8 @@ const FormClient: React.FC<FormClientProps> = ({
 	]
 
 	useEffect(() => {
-		const { firstName, lastName, price } = formData
-		const allFieldsFilled = firstName && lastName && price
+		const { firstName, lastName, price, phone } = formData
+		const allFieldsFilled = !!(firstName && lastName && price && phone)
 		setIsFormFilled(allFieldsFilled)
 	}, [formData])
 
