@@ -60,7 +60,7 @@ const ReservationForm: React.FC<ReservationFormProps> = ({
 
 	useEffect(() => {
 		const { firstName, lastName, phone } = formData
-		const allFieldsFilled = firstName && lastName && phone
+		const allFieldsFilled = !!(firstName && lastName && phone)
 		setIsFormFilled(allFieldsFilled)
 	}, [formData])
 
