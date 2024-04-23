@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName            String?
+  lastName             String?
+  chatId               String?    
+  userId               String? @unique
+  username             String? @unique
+  isMaster             Boolean @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model Master {
+  id                   String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName            String?
+  lastName             String?
+  category             String?
+  chatId               String?  
+  userId               String? @unique 
+  username             String? @unique
+  image                String?
+  startTime            String?
+  endTime              String?
+  interval             Int
+  slotTime             String[]
+  price                String?
+  phone                String?
+  disDays              Int[]
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model Reservation {
+  id                   String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName            String?
+  lastName             String?
+  masterId             String? 
+  userId               String?
+  date                 String
+  time                 String
+  price                String
+  phone                String?
+}

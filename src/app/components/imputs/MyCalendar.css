@@ -1,0 +1,23 @@
+.calendar {
+	background-color: var(--tg-theme-section-bg-color) !important;
+	color: var(--tg-theme-text-color);
+}
+.rdrDay {
+	background-color: var(--tg-theme-section-bg-color) !important;
+}
+
+.rdrDayNumber span {
+	color: var(--tg-theme-text-color) !important;
+}
+
+.rdrDayDisabled {
+	background-color: var(--tg-theme-secondary-bg-color) !important;
+}
+
+.rdrDayPassive {
+	background-color: var(--tg-theme-secondary-bg-color) !important;
+}
+
+.rdrMonthAndYearPickers select {
+	color: var(--tg-theme-text-color) !important;
+}
