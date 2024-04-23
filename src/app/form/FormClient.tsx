@@ -15,16 +15,12 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import AvatarUpload from '../components/UploadAvatar'
 
-import { Checkbox, GetProp } from 'antd'
+import { Checkbox } from 'antd'
 
 interface FormClientProps {
 	currentMaster?: SafeMaster | null
-	currentUser?: SafeUser | null
 }
-const FormClient: React.FC<FormClientProps> = ({
-	currentMaster,
-	currentUser,
-}) => {
+const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
 	const [formData, setFormData] = useState({
