@@ -1,4 +1,5 @@
-import prisma from '@/app/libs/prismadb'
+import Masters from '@/app/models/Masters'
+import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
@@ -9,26 +10,26 @@ export async function POST(request: Request) {
 		return NextResponse.error()
 	}
 
-	const master = await prisma.master.findMany({
-		where: {
-			userId: userId,
-		},
+	const master = await Masters.find({
+		userId: userId,
 	})
 
-	const timings = master.map(timing => timing.slotTime)
+	const timings = master.map((timing: { slotTime: any }) => timing.slotTime)
 	const resultTimings = timings.flat()
 
-	const reservation = await prisma.reservation.findMany({
-		where: {
-			masterId: userId,
-			date: date,
-		},
+	const reservation = await Reservation.find({
+		masterId: userId,
+		date: date,
 	})
 
-	const bookedTimes = reservation.map(reservation => reservation.time)
+	const bookedTimes = reservation.map(
+		(reservation: { time: any }) => reservation.time
+	)
 	const resultbookedTimes = bookedTimes.flat()
 
-	const times = resultTimings.filter(item => !resultbookedTimes.includes(item))
+	const times = resultTimings.filter(
+		(item: any) => !resultbookedTimes.includes(item)
+	)
 
 	if (times.length === 0) {
 		return NextResponse.json(resultTimings)

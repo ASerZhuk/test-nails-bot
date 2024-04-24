@@ -1,9 +1,9 @@
 import User from '../../app/models/User.ts'
-import Master from '../../app/models/Master.ts'
 import mongoose from 'mongoose'
 import bot from '@/pages/api/bot'
+import Masters from '../../app/models/Masters.ts'
 
-const webAppUrl = 'https://test-nails-bot.vercel.app/'
+const webAppUrl = 'https://test-nails-bot.vercel.app'
 
 mongoose
 	.connect(process.env.MONGODB_URI)
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 			if (text === '/start') {
 				let user = await User.findOne({ userId: userId })
 				if (!user) {
-					const masterUserExists = await Master.findOne({ isMaster: true })
+					const masterUserExists = await Masters.findOne({ isMaster: true })
 					const userData = {
 						firstName: message.chat.first_name,
 						lastName: message.chat.last_name,
@@ -41,12 +41,13 @@ export default async function handler(req, res) {
 					if (!masterUserExists) {
 						userData.isMaster = true
 						// Создаем запись в коллекции Master
-						await Master.create({
+						await Masters.create({
 							firstName: message.chat.first_name,
 							lastName: message.chat.last_name,
 							username: username,
 							chatId: chatId,
 							userId: userId,
+							category: '',
 							image: '',
 							startTime: '06:00',
 							endTime: '06:00',

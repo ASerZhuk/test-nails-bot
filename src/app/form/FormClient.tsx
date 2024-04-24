@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Input from '../components/imputs/inputs'
-import { SafeMaster, SafeUser } from '../types'
+import { SafeMaster } from '../types'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import TimeWork from '../components/imputs/timeWorks'
 import Counter from '../components/imputs/counter'
@@ -27,7 +27,6 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 		firstName: `${currentMaster?.firstName}`,
 		lastName: `${currentMaster?.lastName}`,
 		price: `${currentMaster?.price}`,
-		category: `${currentMaster?.category}`,
 		phone: `${currentMaster?.phone}`,
 	})
 	const [isFormFilled, setIsFormFilled] = useState(false)
@@ -65,8 +64,8 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 	}
 
 	const handleSave: SubmitHandler<FieldValues> = async data => {
-		const { firstName, lastName, price, category, phone } = formData
-		const newData = { ...data, firstName, lastName, price, category, phone }
+		const { firstName, lastName, price, phone } = formData
+		const newData = { ...data, firstName, lastName, price, phone }
 		axios.post('/api/profile', newData).then(() => {
 			WebApp.showAlert('Профиль успешно обновлен', [WebApp.close()])
 		})
@@ -121,17 +120,6 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 					name='lastName'
 					label='Фамилия'
 					value={formData.lastName}
-					onChange={handleInputChange}
-					disabled={isLoading}
-					required
-				/>
-
-				<Input
-					type='text'
-					id='category'
-					name='category'
-					label='Категория услуги'
-					value={formData.category}
 					onChange={handleInputChange}
 					disabled={isLoading}
 					required

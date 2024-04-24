@@ -1,15 +1,15 @@
 import getMaster from '@/app/actions/getMaster'
 import Container from '@/app/components/Container'
 import Master from './components/Master'
-import { Spin } from 'antd'
 
 const Home = async () => {
 	const currentMaster = await getMaster()
+	const currentMasterPlain = currentMaster.toObject()
 
 	return (
 		<>
 			<Container>
-				<Master currentMaster={currentMaster} />
+				<Master currentMaster={currentMasterPlain} />
 			</Container>
 		</>
 	)

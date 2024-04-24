@@ -4,6 +4,7 @@ import getMaster from '../actions/getMaster'
 
 const page = async () => {
 	const currentMaster = await getMaster()
+
 	return (
 		<Container>
 			<FormClient currentMaster={currentMaster} />

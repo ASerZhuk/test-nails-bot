@@ -1,4 +1,4 @@
-import prisma from '@/app/libs/prismadb'
+import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
@@ -8,10 +8,8 @@ export async function GET(request: Request) {
 		return NextResponse.error()
 	}
 
-	const reservations = await prisma.reservation.findMany({
-		where: {
-			masterId: masterId.toString(),
-		},
+	const reservations = await Reservation.find({
+		masterId: masterId.toString(),
 	})
 
 	return NextResponse.json(reservations)

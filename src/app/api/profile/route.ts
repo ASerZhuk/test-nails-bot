@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
-
-import prisma from '@/app/libs/prismadb'
-
 import getCurrentMaster from '@/app/actions/getMaster'
+import Masters from '../../models/Masters'
 
 function generateTimeSlots(
 	startTime: string,
@@ -39,7 +37,7 @@ export async function POST(request: Request) {
 	const {
 		firstName,
 		lastName,
-		category,
+
 		startTime,
 		endTime,
 		interval,
@@ -49,31 +47,46 @@ export async function POST(request: Request) {
 		phone,
 	} = body
 
-	Object.keys(body).forEach((value: any) => {
-		if (!body[value]) {
-			NextResponse.error()
-		}
-	})
+	const requiredFields = [
+		firstName,
+		lastName,
+
+		startTime,
+		endTime,
+		interval,
+		price,
+		image,
+		selectedDays,
+		phone,
+	]
+	if (requiredFields.some(field => !field)) {
+		return NextResponse.error()
+	}
 
 	const slotTime = generateTimeSlots(startTime, endTime, interval)
 
-	const master = await prisma.master.update({
-		where: {
-			id: currentMaster.id,
-		},
-		data: {
-			firstName: firstName,
-			lastName: lastName,
-			category: category,
-			startTime: startTime,
-			endTime: endTime,
-			interval: interval,
-			price: price,
-			slotTime: slotTime,
-			image: image,
-			disDays: selectedDays,
-			phone: phone,
-		},
-	})
-	return NextResponse.json(master)
+	try {
+		const updatedMaster = await Masters.findByIdAndUpdate(
+			currentMaster._id,
+			{
+				firstName: firstName,
+				lastName: lastName,
+
+				startTime: startTime,
+				endTime: endTime,
+				interval: interval,
+				price: price,
+				slotTime: slotTime,
+				image: image,
+				disDays: selectedDays,
+				phone: phone,
+			},
+			{ new: true }
+		)
+
+		return NextResponse.json(updatedMaster)
+	} catch (error) {
+		console.error('Ошибка при обновлении мастера:', error)
+		return NextResponse.error()
+	}
 }

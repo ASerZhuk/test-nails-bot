@@ -17,10 +17,10 @@ const AppointmentClient = () => {
 	const WebApp = useWebApp()
 
 	const onCancel = useCallback(
-		(id: string) => {
-			setDeletingId(id)
+		(_id: string) => {
+			setDeletingId(_id)
 			axios
-				.delete(`/api/delete_client/${id}`)
+				.delete(`/api/delete_client/${_id}`)
 				.then(() => {
 					WebApp.showAlert('Запись успешно отменена', [router.push('/')])
 				})
@@ -106,7 +106,7 @@ const AppointmentClient = () => {
 								}}
 								className='cursor-pointer p-2 pl-4 pr-4 rounded-full text-xs mt-2'
 								onClick={() => {
-									onCancel(reservation.id)
+									onCancel(reservation._id)
 								}}
 							>
 								Отменить запись

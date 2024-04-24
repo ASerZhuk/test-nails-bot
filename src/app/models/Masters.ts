@@ -1,9 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 
-export interface Master extends mongoose.Document {
+export interface Masters extends mongoose.Document {
 	firstName?: string
 	lastName?: string
-	category?: string
 	chatId?: string
 	userId?: string
 	username?: string
@@ -19,13 +18,14 @@ export interface Master extends mongoose.Document {
 	updatedAt: Date
 }
 
-const MasterSchema: Schema<Master> = new Schema({
+const MastersSchema: Schema<Masters> = new Schema({
 	firstName: {
 		type: String,
 	},
 	lastName: {
 		type: String,
 	},
+
 	chatId: {
 		type: String,
 	},
@@ -72,4 +72,4 @@ const MasterSchema: Schema<Master> = new Schema({
 })
 
 export default mongoose.models.Master ||
-	mongoose.model<Master>('Master', MasterSchema)
+	mongoose.model<Masters>('Masters', MastersSchema)

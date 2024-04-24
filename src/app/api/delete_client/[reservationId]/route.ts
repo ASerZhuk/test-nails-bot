@@ -1,5 +1,5 @@
+import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
-import prisma from '@/app/libs/prismadb'
 
 interface IParams {
 	reservationId?: string
@@ -16,10 +16,8 @@ export async function DELETE(
 
 	try {
 		// Удаляем резервацию по идентификатору
-		const deletedReservation = await prisma.reservation.delete({
-			where: {
-				id: reservationId,
-			},
+		const deletedReservation = await Reservation.deleteOne({
+			_id: reservationId,
 		})
 
 		// Возвращаем успешный статус и удаленную резервацию

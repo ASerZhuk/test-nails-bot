@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
-import { Avatar, Spin } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons'
+import { Avatar } from 'antd'
 
 import { SafeMaster } from '../types'
 import { HiOutlineCalendarDays } from 'react-icons/hi2'

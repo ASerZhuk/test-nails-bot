@@ -1,29 +1,26 @@
-import prisma from '@/app/libs/prismadb'
 import { NextResponse } from 'next/server'
 import bot from '@/pages/api/bot'
+import Reservation from '@/app/models/Reservation'
+import Masters from '@/app/models/Masters'
 
 export async function POST(request: Request) {
 	const body = await request.json()
 	const { masterId, date, times, price, firstName, lastName, phone, userId } =
 		body
 
-	const reservation = await prisma.reservation.create({
-		data: {
-			firstName,
-			lastName,
-			masterId,
-			date,
-			time: times,
-			price,
-			phone,
-			userId,
-		},
+	const reservation = await Reservation.create({
+		firstName,
+		lastName,
+		masterId,
+		date,
+		time: times,
+		price,
+		phone,
+		userId,
 	})
 
-	const master = await prisma.master.findUnique({
-		where: {
-			userId: masterId,
-		},
+	const master = await Masters.findOne({
+		userId: masterId,
 	})
 
 	const master_chat = parseInt(masterId)
