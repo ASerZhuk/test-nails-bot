@@ -1,6 +1,7 @@
-import { User, Master } from '@prisma/client'
+import { Masters } from '../models/Masters'
+import { User } from '../models/User'
 
-export type SafeMaster = Omit<Master, 'createdAt' | 'updatedAt'> & {
+export type SafeMaster = Omit<Masters, 'createdAt' | 'updatedAt'> & {
 	createdAt: Date
 	updatedAt: Date
 }
