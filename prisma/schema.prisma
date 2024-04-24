@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://gudvin109:hWiF6I3VQExRtMdT@cluster0.pp1kidj.mongodb.net/nails"
+  url      = "mongodb://aser:x744y1p7PGr4,5hC3@212.233.121.151/testbotnails"
 }
 
 model User {
