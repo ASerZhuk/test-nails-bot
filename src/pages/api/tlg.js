@@ -1,7 +1,14 @@
-import prisma from '@/app/libs/prismadb'
+import User from '../../app/models/User.ts'
+import Master from '../../app/models/Master.ts'
+import mongoose from 'mongoose'
 import bot from '@/pages/api/bot'
 
 const webAppUrl = 'https://test-nails-bot.vercel.app/'
+
+mongoose
+	.connect(process.env.MONGODB_URI)
+	.then(() => console.log('Connected to MongoDB'))
+	.catch(err => console.error('Error connecting to MongoDB:', err))
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
@@ -14,25 +21,15 @@ export default async function handler(req, res) {
 					.end('Ошибка: поле chat или его id не определены в сообщении')
 				return
 			}
-			const chat_Id = message.chat.id
-			const chatId = chat_Id.toString()
+			const chatId = message.chat.id.toString()
 			const text = message.text
 			const username = message.chat.username
-			const from_Id = message.from.id
-			const userId = from_Id.toString()
+			const userId = message.from.id.toString()
 
 			if (text === '/start') {
-				let user = await prisma.user.findUnique({
-					where: {
-						userId: userId,
-					},
-				})
+				let user = await User.findOne({ userId: userId })
 				if (!user) {
-					const masterUserExists = await prisma.user.findFirst({
-						where: {
-							isMaster: true,
-						},
-					})
+					const masterUserExists = await Master.findOne({ isMaster: true })
 					const userData = {
 						firstName: message.chat.first_name,
 						lastName: message.chat.last_name,
@@ -44,25 +41,21 @@ export default async function handler(req, res) {
 					if (!masterUserExists) {
 						userData.isMaster = true
 						// Создаем запись в коллекции Master
-						await prisma.master.create({
-							data: {
-								firstName: message.chat.first_name,
-								lastName: message.chat.last_name,
-								username: username,
-								chatId: chatId,
-								userId: userId,
-								image: '',
-								startTime: '06:00',
-								endTime: '06:00',
-								interval: 0,
-								slotTime: [],
-								price: '',
-							},
+						await Master.create({
+							firstName: message.chat.first_name,
+							lastName: message.chat.last_name,
+							username: username,
+							chatId: chatId,
+							userId: userId,
+							image: '',
+							startTime: '06:00',
+							endTime: '06:00',
+							interval: 0,
+							slotTime: [],
+							price: '',
 						})
 					}
-					user = await prisma.user.create({
-						data: userData,
-					})
+					user = await User.create(userData)
 				}
 
 				let inlineKeyboard = []
@@ -92,9 +85,7 @@ export default async function handler(req, res) {
 						chatId,
 						'🎉 Добро пожаловать в приложение для онлайн записи! \n\n Заходите в меню "Мой профиль" для добавления и изменения информации о вас и вашей услуге! \n 👉 Так же там вы сможете сами записать своих клиентов, если на момент использования этого приложения у вас уже есть записи',
 						{
-							reply_markup: {
-								inline_keyboard: inlineKeyboard,
-							},
+							reply_markup: { inline_keyboard: inlineKeyboard },
 						}
 					)
 				} else {
@@ -102,9 +93,7 @@ export default async function handler(req, res) {
 						chatId,
 						'🎉 Добро пожаловать в приложение для онлайн записи! \n\n Заходите в меню "Записаться" для осуществления онлайн записи на услугу!',
 						{
-							reply_markup: {
-								inline_keyboard: inlineKeyboard,
-							},
+							reply_markup: { inline_keyboard: inlineKeyboard },
 						}
 					)
 				}
