@@ -6,9 +6,6 @@ import { Spin } from 'antd'
 const Home = async () => {
 	const currentMaster = await getMaster()
 
-	if (!currentMaster) {
-		return <Spin />
-	}
 	return (
 		<>
 			<Container>
