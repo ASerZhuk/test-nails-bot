@@ -33,7 +33,7 @@ const Master: React.FC<MasterProps> = ({ currentMaster }) => {
 
 	const allDaysOfWeek = [1, 2, 3, 4, 5, 6, 0]
 	const availableDaysOfWeek: number[] = allDaysOfWeek.filter(
-		day => !currentMaster?.disDays.includes(day)
+		day => !currentMaster?.disDays?.includes(day)
 	)
 	const availableDayNames = availableDaysOfWeek.map(day => dayOfWeekNames[day])
 
@@ -65,9 +65,6 @@ const Master: React.FC<MasterProps> = ({ currentMaster }) => {
 					style={{ color: 'var(--tg-theme-text-color)' }}
 				>
 					{currentMaster?.firstName} {currentMaster?.lastName}
-				</div>
-				<div className='mt-2' style={{ color: 'var(--tg-theme-hint-color)' }}>
-					{currentMaster?.category}
 				</div>
 			</div>
 
