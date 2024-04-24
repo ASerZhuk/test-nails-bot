@@ -1,0 +1,10 @@
+{
+	"build": {
+		"env": {
+			"DATABASE_URL": "mongodb+srv://gudvin109:hWiF6I3VQExRtMdT@cluster0.pp1kidj.mongodb.net/nails"
+		},
+		"commands": {
+			"build": "prisma generate && next build"
+		}
+	}
+}
