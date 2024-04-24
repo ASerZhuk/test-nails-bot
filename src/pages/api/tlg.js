@@ -1,7 +1,7 @@
 import prisma from '@/app/libs/prismadb'
 import bot from '@/pages/api/bot'
 
-const webAppUrl = 'https://test-nails-bot.onrender.com'
+const webAppUrl = 'https://a64a-94-253-64-116.ngrok-free.app'
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
