@@ -22,17 +22,11 @@ export default async function handler(req, res) {
 			const userId = from_Id.toString()
 
 			if (text === '/start') {
-				await bot.sendMessage(
-					chatId,
-					'🎉 Добро пожаловать в приложение для онлайн записи! \n\n Заходите в меню "Мой профиль" для добавления и изменения информации о вас и вашей услуге! \n 👉 Так же там вы сможете сами записать своих клиентов, если на момент использования этого приложения у вас уже есть записи'
-				)
-				{
-					/*let user = await prisma.user.findUnique({
+				let user = await prisma.user.findUnique({
 					where: {
 						userId: userId,
 					},
-				})*/
-				}
+				})
 				if (!user) {
 					const masterUserExists = await prisma.user.findFirst({
 						where: {
