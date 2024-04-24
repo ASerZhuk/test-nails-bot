@@ -154,7 +154,8 @@ const ReservationForm: React.FC<ReservationFormProps> = ({
 		for (let i = 0; i < 365; i++) {
 			currentDate.setDate(currentDate.getDate() + 1)
 			const dayOfWeek = currentDate.getDay()
-			if (ddays.includes(dayOfWeek)) {
+			if (ddays && ddays.includes(dayOfWeek)) {
+				// Добавим проверку на undefined
 				disabledDates.push(new Date(currentDate))
 			}
 		}
