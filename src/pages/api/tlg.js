@@ -1,7 +1,7 @@
 import prisma from '@/app/libs/prismadb'
 import bot from '@/pages/api/bot'
 
-const webAppUrl = 'https://test-nails-bot.vercel.app'
+const webAppUrl = 'https://test-nails-bot.onrender.com'
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
