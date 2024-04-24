@@ -4,7 +4,6 @@ import bot from '@/pages/api/bot'
 import Masters from '../../app/models/Masters.ts'
 
 const webAppUrl = 'https://test-nails-bot.vercel.app'
-
 mongoose
 	.connect(process.env.MONGODB_URI)
 	.then(() => console.log('Connected to MongoDB'))
