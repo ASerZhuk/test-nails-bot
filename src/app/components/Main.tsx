@@ -1,24 +1,21 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
 import { useRouter } from 'next/navigation'
-import { Avatar } from 'antd'
-
-import { SafeMaster } from '../types'
+import { Avatar, Spin } from 'antd'
 import { HiOutlineCalendarDays } from 'react-icons/hi2'
 import { BsWatch } from 'react-icons/bs'
 import { GrMoney } from 'react-icons/gr'
+import { SafeMaster } from '../types'
 
-interface MasterProps {
-	currentMaster: SafeMaster | null
+interface MainProps {
+	currentMaster?: SafeMaster | null
 }
 
-const Master: React.FC<MasterProps> = ({ currentMaster }) => {
-	const [tg_name, setTg_Name] = useState()
+const Main: React.FC<MainProps> = ({ currentMaster }) => {
 	const [tg_id, setTg_Id] = useState()
-
 	const router = useRouter()
+	//const [currentMaster, setCurrentMaster] = useState({})
 	const ddays = currentMaster?.disDays
 
 	const dayOfWeekNames: Record<number, string> = {
@@ -39,11 +36,9 @@ const Master: React.FC<MasterProps> = ({ currentMaster }) => {
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
-		const name = tg?.initDataUnsafe.user?.first_name
 		const tg_id = tg?.initDataUnsafe.user?.id
 		const id = tg_id?.toString()
 
-		setTg_Name(name)
 		setTg_Id(id)
 
 		tg.MainButton.show()
@@ -54,7 +49,6 @@ const Master: React.FC<MasterProps> = ({ currentMaster }) => {
 	const handleNext = () => {
 		router.push(`/reservation_form`)
 	}
-
 	return (
 		<>
 			<div className='flex flex-col items-center'>
@@ -161,4 +155,4 @@ const Master: React.FC<MasterProps> = ({ currentMaster }) => {
 	)
 }
 
-export default Master
+export default Main

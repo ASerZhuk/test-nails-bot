@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import getCurrentMaster from '@/app/actions/getMaster'
-import Masters from '../../models/Masters'
+import Masters from '../../models/Master'
 
 function generateTimeSlots(
 	startTime: string,
@@ -37,7 +37,6 @@ export async function POST(request: Request) {
 	const {
 		firstName,
 		lastName,
-
 		startTime,
 		endTime,
 		interval,
@@ -50,7 +49,6 @@ export async function POST(request: Request) {
 	const requiredFields = [
 		firstName,
 		lastName,
-
 		startTime,
 		endTime,
 		interval,
@@ -71,7 +69,6 @@ export async function POST(request: Request) {
 			{
 				firstName: firstName,
 				lastName: lastName,
-
 				startTime: startTime,
 				endTime: endTime,
 				interval: interval,

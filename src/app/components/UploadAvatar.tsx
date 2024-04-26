@@ -78,6 +78,7 @@ const AvatarUpload = ({ onChange, value }: AvatarUploadProps) => {
 						src={value}
 						alt={value}
 					/>
+
 					<button
 						className='
               p-2 pl-4 pr-4 rounded-full

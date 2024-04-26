@@ -1,4 +1,4 @@
-import Masters from '@/app/models/Masters'
+import Masters from '@/app/models/Master'
 import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
 

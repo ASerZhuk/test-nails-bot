@@ -1,4 +1,4 @@
-import Masters from '../models/Masters'
+import Masters from '../models/Master'
 
 export default async function getMaster() {
 	try {

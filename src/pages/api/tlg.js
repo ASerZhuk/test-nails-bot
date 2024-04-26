@@ -1,15 +1,13 @@
 import User from '../../app/models/User.ts'
-import mongoose from 'mongoose'
-import bot from '@/pages/api/bot'
-import Masters from '../../app/models/Masters.ts'
 
-const webAppUrl = 'https://test-nails-bot.vercel.app'
-mongoose
-	.connect(process.env.MONGODB_URI)
-	.then(() => console.log('Connected to MongoDB'))
-	.catch(err => console.error('Error connecting to MongoDB:', err))
+import bot from '@/pages/api/bot'
+import Masters from '../../app/models/Master.ts'
+import dbConnect from '../../app/libs/dbConnect.ts'
+
+const webAppUrl = 'https://test-nails-bot.vercel.app/'
 
 export default async function handler(req, res) {
+	await dbConnect()
 	if (req.method === 'POST') {
 		try {
 			const { message } = req.body

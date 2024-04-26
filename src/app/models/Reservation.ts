@@ -11,32 +11,37 @@ export interface Reservation extends mongoose.Document {
 	phone?: string
 }
 
-const ReservationSchema: Schema<Reservation> = new Schema({
-	firstName: {
-		type: String,
+const ReservationSchema: Schema<Reservation> = new Schema(
+	{
+		firstName: {
+			type: String,
+		},
+		lastName: {
+			type: String,
+		},
+		masterId: {
+			type: String,
+		},
+		userId: {
+			type: String,
+		},
+		date: {
+			type: String,
+		},
+		time: {
+			type: String,
+		},
+		price: {
+			type: String,
+		},
+		phone: {
+			type: String,
+		},
 	},
-	lastName: {
-		type: String,
-	},
-	masterId: {
-		type: String,
-	},
-	userId: {
-		type: String,
-	},
-	date: {
-		type: String,
-	},
-	time: {
-		type: String,
-	},
-	price: {
-		type: String,
-	},
-	phone: {
-		type: String,
-	},
-})
+	{
+		timestamps: true,
+	}
+)
 
 export default mongoose.models.Reservation ||
 	mongoose.model<Reservation>('Reservation', ReservationSchema)

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import bot from '@/pages/api/bot'
 import Reservation from '@/app/models/Reservation'
-import Masters from '@/app/models/Masters'
+import Masters from '@/app/models/Master'
 
 export async function POST(request: Request) {
 	const body = await request.json()

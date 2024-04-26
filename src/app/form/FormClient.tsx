@@ -180,6 +180,7 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 					onClick={() => handleSubmit(handleSave)()}
 				/>
 			)}
+			<button onClick={() => handleSubmit(handleSave)()}>Cj[hfybnm</button>
 		</>
 	)
 }
