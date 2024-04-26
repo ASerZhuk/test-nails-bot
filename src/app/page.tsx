@@ -4,6 +4,7 @@ import getMaster from './actions/getMaster'
 
 const Home = async () => {
 	const currentMaster = await getMaster()
+
 	return (
 		<>
 			<Container>

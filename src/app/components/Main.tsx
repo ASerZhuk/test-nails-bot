@@ -15,8 +15,6 @@ interface MainProps {
 const Main: React.FC<MainProps> = ({ currentMaster }) => {
 	const [tg_id, setTg_Id] = useState()
 	const router = useRouter()
-	//const [currentMaster, setCurrentMaster] = useState({})
-	const ddays = currentMaster?.disDays
 
 	const dayOfWeekNames: Record<number, string> = {
 		0: 'Вск',
