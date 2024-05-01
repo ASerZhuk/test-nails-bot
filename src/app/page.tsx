@@ -7,7 +7,7 @@ import axios from 'axios'
 const Home = async () => {
 	const getMaster = async () => {
 		try {
-			const response = await axios.get('api/master')
+			const response = await axios.post('api/master')
 			const reservationsData = response.data
 			return reservationsData
 		} catch (error) {
