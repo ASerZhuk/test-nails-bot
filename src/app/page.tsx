@@ -1,8 +1,11 @@
 import Container from '@/app/components/Container'
 import Main from './components/Main'
+import dbConnect from './libs/dbConnect'
+import Masters from '@/app/models/Master'
 
 const Home = async () => {
-	const data = await getData()
+	await dbConnect()
+	const data = await Masters.findOne({})
 	return (
 		<>
 			<Container>
@@ -10,10 +13,6 @@ const Home = async () => {
 			</Container>
 		</>
 	)
-
-	function getData() {
-		return fetch('/api/master').then(res => res.json())
-	}
 }
 
 export default Home
