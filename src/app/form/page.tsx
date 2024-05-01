@@ -7,12 +7,7 @@ import { cache } from 'react'
 
 const page = async () => {
 	await dbConnect()
-	const data = await Masters.findOne(
-		{},
-		{
-			cache: 'no-store',
-		}
-	)
+	const data = await Masters.findOne({})
 
 	return (
 		<Container>

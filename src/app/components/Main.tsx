@@ -7,12 +7,23 @@ import { HiOutlineCalendarDays } from 'react-icons/hi2'
 import { BsWatch } from 'react-icons/bs'
 import { GrMoney } from 'react-icons/gr'
 import { SafeMaster } from '../types'
+import dbConnect from '../libs/dbConnect'
+import Masters from '../models/Master'
 
 interface MainProps {
 	currentMaster?: SafeMaster | null
 }
 
 const Main: React.FC<MainProps> = ({ currentMaster }) => {
+	async function getMaster() {
+		'use server'
+		await dbConnect()
+		const currentMaster = await Masters.findOne({})
+		const plaincurrentMaster = JSON.parse(JSON.stringify(currentMaster))
+		return plaincurrentMaster
+	}
+
+	const master = getMaster()
 	const [tg_id, setTg_Id] = useState()
 	const router = useRouter()
 
@@ -51,6 +62,7 @@ const Main: React.FC<MainProps> = ({ currentMaster }) => {
 		<>
 			<div className='flex flex-col items-center'>
 				<Avatar size={220} src={currentMaster?.image} />
+				<div>{master}</div>
 
 				<div
 					className='mt-8 text-2xl'
