@@ -2,13 +2,7 @@ import Container from '@/app/components/Container'
 import Main from './components/Main'
 
 const Home = async () => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/master`,
-		{
-			cache: 'no-store',
-		}
-	)
-	const data = await res.json()
+	const data = await getData()
 	return (
 		<>
 			<Container>
@@ -16,6 +10,10 @@ const Home = async () => {
 			</Container>
 		</>
 	)
+
+	function getData() {
+		return fetch('/api/data').then(res => res.json())
+	}
 }
 
 export default Home
