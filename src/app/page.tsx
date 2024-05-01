@@ -5,25 +5,19 @@ import Masters from '@/app/models/Master'
 import axios from 'axios'
 
 const Home = async () => {
-	const getMaster = async () => {
-		try {
-			const response = await axios.post('api/master', { isMaster: true })
-			const reservationsData = response.data
-			return reservationsData
-		} catch (error) {
-			console.error('Failed to fetch master:', error)
-		}
+	try {
+		const response = await axios.post('api/master', { isMaster: true })
+		const data = response.data
+		return (
+			<>
+				<Container>
+					<Main currentMaster={data} />
+				</Container>
+			</>
+		)
+	} catch (error) {
+		console.error('Failed to fetch master:', error)
 	}
-
-	const data = await getMaster()
-
-	return (
-		<>
-			<Container>
-				<Main currentMaster={data} />
-			</Container>
-		</>
-	)
 }
 
 export default Home
