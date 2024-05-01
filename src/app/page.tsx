@@ -12,7 +12,7 @@ const Home = async () => {
 	)
 
 	function getData() {
-		return fetch('/api/data').then(res => res.json())
+		return fetch('/api/master').then(res => res.json())
 	}
 }
 
