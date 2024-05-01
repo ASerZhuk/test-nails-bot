@@ -3,10 +3,16 @@ import FormClient from './FormClient'
 
 import Masters from '@/app/models/Master'
 import dbConnect from '../libs/dbConnect'
+import { cache } from 'react'
 
 const page = async () => {
 	await dbConnect()
-	const data = await Masters.findOne({})
+	const data = await Masters.findOne(
+		{},
+		{
+			cache: 'no-store',
+		}
+	)
 
 	return (
 		<Container>
