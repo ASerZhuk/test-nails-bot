@@ -7,7 +7,7 @@ import dbConnect from '../../app/libs/dbConnect.ts'
 const webAppUrl = 'https://test-nails-bot.vercel.app'
 
 export default async function handler(req, res) {
-	await dbConnect(
+	await dbConnect()
 	if (req.method === 'POST') {
 		try {
 			const { message } = req.body
