@@ -7,15 +7,15 @@ import { HiOutlineCalendarDays } from 'react-icons/hi2'
 import { BsWatch } from 'react-icons/bs'
 import { GrMoney } from 'react-icons/gr'
 import { SafeMaster } from '../types'
-import axios from 'axios'
 
 interface MainProps {
-	currentMaster: SafeMaster | null
+	currentMaster?: SafeMaster | null
 }
 
 const Main: React.FC<MainProps> = ({ currentMaster }) => {
 	const [tg_id, setTg_Id] = useState()
 	const router = useRouter()
+
 	const dayOfWeekNames: Record<number, string> = {
 		0: 'Вск',
 		1: 'Пнд',
@@ -47,7 +47,6 @@ const Main: React.FC<MainProps> = ({ currentMaster }) => {
 	const handleNext = () => {
 		router.push(`/reservation_form`)
 	}
-
 	return (
 		<>
 			<div className='flex flex-col items-center'>
