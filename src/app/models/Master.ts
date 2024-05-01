@@ -14,6 +14,7 @@ export interface IMasters extends mongoose.Document {
 	price?: string
 	phone?: string
 	disDays?: number[]
+	isMaster: boolean
 }
 
 const MastersSchema: Schema<IMasters> = new Schema(
@@ -59,6 +60,9 @@ const MastersSchema: Schema<IMasters> = new Schema(
 		},
 		disDays: {
 			type: [Number],
+		},
+		isMaster: {
+			type: Boolean,
 		},
 	},
 	{

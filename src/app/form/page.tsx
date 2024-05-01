@@ -8,9 +8,8 @@ import axios from 'axios'
 
 const page = async () => {
 	const getMaster = async () => {
-		await dbConnect()
 		try {
-			const response = await axios.post('api/master')
+			const response = await axios.post('api/master', { isMaster: true })
 			const reservationsData = response.data
 			return reservationsData
 		} catch (error) {
