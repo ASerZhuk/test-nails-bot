@@ -19,6 +19,7 @@ import { GrMoney } from 'react-icons/gr'
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdPhoneAndroid } from 'react-icons/md'
 import Input from '../components/imputs/inputs'
+import { IMasters } from '../models/Master'
 
 enum STEPS {
 	DATE = 0,
@@ -26,14 +27,7 @@ enum STEPS {
 	CONF = 2,
 }
 
-interface ReservationFormProps {
-	currentMaster?: SafeMaster | null
-	currentUser?: SafeUser | null
-}
-const ReservationForm: React.FC<ReservationFormProps> = ({
-	currentMaster,
-	currentUser,
-}) => {
+const ReservationForm = () => {
 	const router = useRouter()
 	const [step, setStep] = useState(STEPS.DATE)
 	const [isLoading, setIsLoading] = useState(false)
@@ -51,6 +45,8 @@ const ReservationForm: React.FC<ReservationFormProps> = ({
 
 	const [userId, setUserId] = useState()
 	const WebApp = useWebApp()
+
+	const [currentMaster, setCurrentMaster] = useState<IMasters>()
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
@@ -130,6 +126,20 @@ const ReservationForm: React.FC<ReservationFormProps> = ({
 			}
 		}
 	}
+
+	useEffect(() => {
+		const getMaster = async () => {
+			try {
+				const response = await axios.post(`/api/master`)
+				const masterData = response.data
+				setCurrentMaster(masterData)
+			} catch (error) {
+				console.error('Failed to fetch master:', error)
+			}
+		}
+
+		getMaster()
+	}, [])
 
 	const handleTimeSlotSelect = (timeSlot: string) => {
 		setSelectedTimeSlot(timeSlot)

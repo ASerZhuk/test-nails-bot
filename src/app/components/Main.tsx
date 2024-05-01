@@ -7,15 +7,13 @@ import { HiOutlineCalendarDays } from 'react-icons/hi2'
 import { BsWatch } from 'react-icons/bs'
 import { GrMoney } from 'react-icons/gr'
 import { SafeMaster } from '../types'
+import { IMasters } from '../models/Master'
+import axios from 'axios'
 
-interface MainProps {
-	currentMaster?: SafeMaster | null
-}
-
-const Main: React.FC<MainProps> = ({ currentMaster }) => {
+const Main = ({}) => {
 	const [tg_id, setTg_Id] = useState()
 	const router = useRouter()
-
+	const [currentMaster, setCurrentMaster] = useState<IMasters>()
 	const dayOfWeekNames: Record<number, string> = {
 		0: 'Вск',
 		1: 'Пнд',
@@ -47,6 +45,20 @@ const Main: React.FC<MainProps> = ({ currentMaster }) => {
 	const handleNext = () => {
 		router.push(`/reservation_form`)
 	}
+
+	useEffect(() => {
+		const getMaster = async () => {
+			try {
+				const response = await axios.post(`/api/master`)
+				const masterData = response.data
+				setCurrentMaster(masterData)
+			} catch (error) {
+				console.error('Failed to fetch master:', error)
+			}
+		}
+
+		getMaster()
+	}, [])
 	return (
 		<>
 			<div className='flex flex-col items-center'>

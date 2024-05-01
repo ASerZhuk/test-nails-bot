@@ -4,7 +4,7 @@ import bot from '@/pages/api/bot'
 import Masters from '../../app/models/Master.ts'
 import dbConnect from '../../app/libs/dbConnect.ts'
 
-const webAppUrl = 'https://82c6-178-167-94-130.ngrok-free.app'
+const webAppUrl = 'https://test-nails-bot.vercel.app'
 
 export default async function handler(req, res) {
 	await dbConnect()

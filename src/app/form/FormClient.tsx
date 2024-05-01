@@ -16,18 +16,33 @@ import { useRouter } from 'next/navigation'
 import AvatarUpload from '../components/UploadAvatar'
 
 import { Checkbox } from 'antd'
+import { IMasters } from '../models/Master'
 
-interface FormClientProps {
-	currentMaster?: SafeMaster | null
-}
-const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
+const FormClient = () => {
 	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
+
+	const [currentMaster, setCurrentMaster] = useState<SafeMaster | null>(null)
+
+	useEffect(() => {
+		const getMaster = async () => {
+			try {
+				const response = await axios.post(`/api/master`)
+				const masterData = response.data
+				setCurrentMaster(masterData)
+			} catch (error) {
+				console.error('Failed to fetch master:', error)
+			}
+		}
+
+		getMaster()
+	}, [])
+
 	const [formData, setFormData] = useState({
-		firstName: `${currentMaster?.firstName}`,
-		lastName: `${currentMaster?.lastName}`,
-		price: `${currentMaster?.price}`,
-		phone: `${currentMaster?.phone}`,
+		firstName: '',
+		lastName: '',
+		price: '',
+		phone: '',
 	})
 	const [isFormFilled, setIsFormFilled] = useState(false)
 	const WebApp = useWebApp()
@@ -39,15 +54,23 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 		watch,
 		formState: { errors },
 		reset,
-	} = useForm<FieldValues>({
-		defaultValues: {
-			startTime: currentMaster?.startTime,
-			endTime: currentMaster?.endTime,
-			interval: currentMaster?.interval,
-			image: currentMaster?.image,
-			selectedDays: currentMaster?.disDays || [],
-		},
-	})
+	} = useForm<FieldValues>()
+
+	useEffect(() => {
+		if (currentMaster) {
+			setFormData({
+				firstName: currentMaster.firstName || '',
+				lastName: currentMaster.lastName || '',
+				price: currentMaster.price || '',
+				phone: currentMaster.phone || '',
+			})
+			setValue('startTime', currentMaster.startTime)
+			setValue('endTime', currentMaster.endTime)
+			setValue('interval', currentMaster.interval)
+			setValue('image', currentMaster.image)
+			setValue('selectedDays', currentMaster.disDays || [])
+		}
+	}, [currentMaster])
 
 	const startTime = watch('startTime')
 	const endTime = watch('endTime')
@@ -94,6 +117,8 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 		const allFieldsFilled = !!(firstName && lastName && price && phone)
 		setIsFormFilled(allFieldsFilled)
 	}, [formData])
+
+	useEffect(() => {}, [])
 
 	return (
 		<>
@@ -170,9 +195,15 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 
 				<Checkbox.Group
 					options={options}
-					defaultValue={currentMaster?.disDays}
+					value={selectedDays}
 					onChange={checkedValues => setValue('selectedDays', checkedValues)}
-				/>
+				>
+					{options.map(option => (
+						<Checkbox key={option.value} value={option.value}>
+							{option.label}
+						</Checkbox>
+					))}
+				</Checkbox.Group>
 			</div>
 			{isFormFilled && (
 				<MainButton
@@ -180,7 +211,6 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 					onClick={() => handleSubmit(handleSave)()}
 				/>
 			)}
-			<button onClick={() => handleSubmit(handleSave)()}>Cj[hfybnm</button>
 		</>
 	)
 }
