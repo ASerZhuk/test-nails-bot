@@ -48,7 +48,7 @@ const Main = ({}) => {
 	useEffect(() => {
 		const getMaster = async () => {
 			try {
-				const response = await axios.post(`/api/master`)
+				const response = await axios.get(`/api/master`)
 				const masterData = response.data
 				setCurrentMaster(masterData)
 			} catch (error) {
