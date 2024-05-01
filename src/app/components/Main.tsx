@@ -49,7 +49,7 @@ const Main = () => {
 		useEffect(() => {
 			const getMaster = async () => {
 				try {
-					const response = await axios.get('/api/master')
+					const response = await axios.get(`/api/master?_=${Date.now()}`)
 					setCurrentMaster(response.data)
 				} catch (error) {
 					console.error('Failed to fetch master:', error)
