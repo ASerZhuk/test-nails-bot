@@ -7,13 +7,12 @@ import { HiOutlineCalendarDays } from 'react-icons/hi2'
 import { BsWatch } from 'react-icons/bs'
 import { GrMoney } from 'react-icons/gr'
 import { SafeMaster } from '../types'
-import { IMasters } from '../models/Master'
 import axios from 'axios'
 
 const Main = ({}) => {
 	const [tg_id, setTg_Id] = useState()
 	const router = useRouter()
-	const [currentMaster, setCurrentMaster] = useState<IMasters>()
+	const [currentMaster, setCurrentMaster] = useState<SafeMaster>()
 	const dayOfWeekNames: Record<number, string> = {
 		0: 'Вск',
 		1: 'Пнд',
