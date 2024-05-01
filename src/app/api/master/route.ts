@@ -6,5 +6,5 @@ export async function GET() {
 	await dbConnect()
 	const master = await Masters.findOne({})
 
-	return NextResponse.json(master)
+	return master
 }
