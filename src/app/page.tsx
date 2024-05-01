@@ -3,9 +3,12 @@ import Main from './components/Main'
 
 const Home = async () => {
 	try {
-		const res = await fetch('/api/master', {
-			cache: 'no-store',
-		})
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/master`,
+			{
+				cache: 'no-store',
+			}
+		)
 
 		if (res.ok) {
 			const data = await res.json()
