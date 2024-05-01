@@ -25,7 +25,6 @@ interface FormClientProps {
 const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
-	//const [currentMaster, setCurrentMaster] = useState<IMasters>()
 	const [formData, setFormData] = useState({
 		firstName: `${currentMaster?.firstName}`,
 		lastName: `${currentMaster?.lastName}`,
@@ -97,8 +96,6 @@ const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
 		const allFieldsFilled = !!(firstName && lastName && price && phone)
 		setIsFormFilled(allFieldsFilled)
 	}, [formData])
-
-	useEffect(() => {}, [])
 
 	return (
 		<>
