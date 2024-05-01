@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const page = async () => {
 	try {
-		const response = await axios.post('api/master', { isMaster: true })
+		const response = await axios.post('/api/master', { isMaster: true })
 		const data = response.data
 		return (
 			<Container>

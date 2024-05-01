@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const Home = async () => {
 	try {
-		const response = await axios.post('api/master', { isMaster: true })
+		const response = await axios.post('/api/master', { isMaster: true })
 		const data = response.data
 		return (
 			<>
