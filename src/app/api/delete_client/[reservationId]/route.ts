@@ -17,7 +17,7 @@ export async function DELETE(
 
 	try {
 		// Удаляем резервацию по идентификатору
-		const deletedReservation = await Reservation.deleteOne({
+		const deletedReservation = await Reservation.findByIdAndDelete({
 			_id: reservationId,
 		})
 
