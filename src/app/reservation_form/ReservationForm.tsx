@@ -66,7 +66,7 @@ const ReservationForm = () => {
 		const tg = window.Telegram?.WebApp
 		const userId = tg?.initDataUnsafe.user?.id
 		setUserId(userId.toString())
-	})
+	}, [])
 
 	useEffect(() => {
 		const { firstName, lastName, phone } = formData

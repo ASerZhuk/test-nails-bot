@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import getCurrentMaster from '@/app/actions/getMaster'
 import Masters from '../../models/Master'
+import { format } from 'date-fns'
 
 function generateTimeSlots(
 	startTime: string,
@@ -17,9 +18,7 @@ function generateTimeSlots(
 	end.setMinutes(parseInt(endTime.split(':')[1]))
 
 	while (currentTime <= end) {
-		timeSlots.push(
-			currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-		)
+		timeSlots.push(format(currentTime, 'HH:mm'))
 		currentTime.setMinutes(currentTime.getMinutes() + interval)
 	}
 
