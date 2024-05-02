@@ -9,7 +9,9 @@ export default async function handler(
 	if (req.method === 'DELETE') {
 		await dbConnect()
 		try {
-			const { reservationId } = req.query
+			const {
+				query: { reservationId },
+			} = req
 			console.log(reservationId)
 
 			// Проверяем наличие идентификатора резервации
