@@ -7,8 +7,7 @@ export default async function handler(
 ) {
 	if (req.method === 'GET') {
 		try {
-			const { isMaster } = req.query
-			const master = await Masters.find({ isMaster })
+			const master = await Masters.findOne({})
 			return res.status(200).json(master)
 		} catch (error) {
 			console.error('Failed to fetch master:', error)

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-export interface User extends mongoose.Document {
+export interface IUser extends mongoose.Document {
 	firstName?: string
 	lastName?: string
 	chatId?: string
@@ -9,7 +9,7 @@ export interface User extends mongoose.Document {
 	isMaster: boolean
 }
 
-const UserSchema: Schema<User> = new Schema(
+const UserSchema: Schema<IUser> = new Schema(
 	{
 		firstName: {
 			type: String,
@@ -37,4 +37,4 @@ const UserSchema: Schema<User> = new Schema(
 	}
 )
 
-export default mongoose.models.User || mongoose.model<User>('User', UserSchema)
+export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema)

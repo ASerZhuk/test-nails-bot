@@ -51,6 +51,7 @@ export default async function handler(req, res) {
 							interval: 0,
 							slotTime: [],
 							price: '',
+							isMaster: true,
 						})
 					}
 					user = await User.create(userData)

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-export interface Reservation extends mongoose.Document {
+export interface IReservation extends mongoose.Document {
 	firstName?: string
 	lastName?: string
 	masterId?: string
@@ -11,7 +11,7 @@ export interface Reservation extends mongoose.Document {
 	phone?: string
 }
 
-const ReservationSchema: Schema<Reservation> = new Schema(
+const ReservationSchema: Schema<IReservation> = new Schema(
 	{
 		firstName: {
 			type: String,
@@ -44,4 +44,4 @@ const ReservationSchema: Schema<Reservation> = new Schema(
 )
 
 export default mongoose.models.Reservation ||
-	mongoose.model<Reservation>('Reservation', ReservationSchema)
+	mongoose.model<IReservation>('Reservation', ReservationSchema)

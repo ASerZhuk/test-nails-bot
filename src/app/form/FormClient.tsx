@@ -20,31 +20,29 @@ import { IMasters } from '../models/Master'
 
 const FormClient = () => {
 	const router = useRouter()
+	const [isLoading, setIsLoading] = useState(false)
 
-	const [currentMaster, setCurrentMaster] = useState<SafeMaster>()
+	const [currentMaster, setCurrentMaster] = useState<SafeMaster | null>(null)
+
 	useEffect(() => {
 		const getMaster = async () => {
 			try {
-				const response = await axios.get('/api/master', {
-					params: { isMaster: true },
-				})
-				setCurrentMaster(response.data)
+				const response = await axios.get('/api/master')
+				const masterData = response.data
+				setCurrentMaster(masterData)
 			} catch (error) {
 				console.error('Failed to fetch master:', error)
 			}
 		}
 
-		if (!currentMaster) {
-			getMaster()
-		}
+		getMaster()
 	}, [])
 
-	const [isLoading, setIsLoading] = useState(false)
 	const [formData, setFormData] = useState({
-		firstName: `${currentMaster?.firstName}`,
-		lastName: `${currentMaster?.lastName}`,
-		price: `${currentMaster?.price}`,
-		phone: `${currentMaster?.phone}`,
+		firstName: '',
+		lastName: '',
+		price: '',
+		phone: '',
 	})
 	const [isFormFilled, setIsFormFilled] = useState(false)
 	const WebApp = useWebApp()
@@ -56,15 +54,23 @@ const FormClient = () => {
 		watch,
 		formState: { errors },
 		reset,
-	} = useForm<FieldValues>({
-		defaultValues: {
-			startTime: currentMaster?.startTime,
-			endTime: currentMaster?.endTime,
-			interval: currentMaster?.interval,
-			image: currentMaster?.image,
-			selectedDays: currentMaster?.disDays || [],
-		},
-	})
+	} = useForm<FieldValues>()
+
+	useEffect(() => {
+		if (currentMaster) {
+			setFormData({
+				firstName: currentMaster.firstName || '',
+				lastName: currentMaster.lastName || '',
+				price: currentMaster.price || '',
+				phone: currentMaster.phone || '',
+			})
+			setValue('startTime', currentMaster.startTime)
+			setValue('endTime', currentMaster.endTime)
+			setValue('interval', currentMaster.interval)
+			setValue('image', currentMaster.image)
+			setValue('selectedDays', currentMaster.disDays || [])
+		}
+	}, [currentMaster])
 
 	const startTime = watch('startTime')
 	const endTime = watch('endTime')
@@ -111,6 +117,8 @@ const FormClient = () => {
 		const allFieldsFilled = !!(firstName && lastName && price && phone)
 		setIsFormFilled(allFieldsFilled)
 	}, [formData])
+
+	useEffect(() => {}, [])
 
 	return (
 		<>
@@ -187,9 +195,15 @@ const FormClient = () => {
 
 				<Checkbox.Group
 					options={options}
-					defaultValue={currentMaster?.disDays}
+					value={selectedDays}
 					onChange={checkedValues => setValue('selectedDays', checkedValues)}
-				/>
+				>
+					{options.map(option => (
+						<Checkbox key={option.value} value={option.value}>
+							{option.label}
+						</Checkbox>
+					))}
+				</Checkbox.Group>
 			</div>
 			{isFormFilled && (
 				<MainButton

@@ -46,20 +46,16 @@ const Main = () => {
 	}
 
 	useEffect(() => {
-		const getMaster = async () => {
+		const getReservationClient = async () => {
 			try {
-				const response = await axios.get('/api/master', {
-					params: { isMaster: true },
-				})
-				setCurrentMaster(response.data)
+				const response = await axios.get('/api/master')
+				const masterData = response.data
+				setCurrentMaster(masterData)
 			} catch (error) {
 				console.error('Failed to fetch master:', error)
 			}
 		}
-
-		if (!currentMaster) {
-			getMaster()
-		}
+		getReservationClient()
 	}, [])
 
 	return (
