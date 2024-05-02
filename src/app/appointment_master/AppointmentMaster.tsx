@@ -17,20 +17,17 @@ const AppointmentMaster = () => {
 	const [deletingId, setDeletingId] = useState('')
 	const WebApp = useWebApp()
 
-	const onCancel = useCallback(
-		(_id: string) => {
-			setDeletingId(_id)
-			axios
-				.delete(`/api/delete_client/${_id}`)
-				.then(() => {
-					WebApp.showAlert('Запись успешно отменена', [router.push('/')])
-				})
-				.finally(() => {
-					setDeletingId('')
-				})
-		},
-		[router]
-	)
+	const onCancel = (_id: string) => {
+		setDeletingId(_id)
+		axios
+			.delete(`/api/delete_client/${_id}`)
+			.then(() => {
+				WebApp.showAlert('Запись успешно отменена', [router.push('/')])
+			})
+			.finally(() => {
+				setDeletingId('')
+			})
+	}
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp

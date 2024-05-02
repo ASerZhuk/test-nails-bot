@@ -13,6 +13,7 @@ export async function DELETE(
 	if (!reservationId || typeof reservationId !== 'string') {
 		throw new Error('Неверный ID резервации')
 	}
+	console.log(reservationId)
 
 	try {
 		// Удаляем резервацию по идентификатору
