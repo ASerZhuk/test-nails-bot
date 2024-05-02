@@ -20,7 +20,7 @@ const AppointmentMaster = () => {
 	const onCancel = (_id: string) => {
 		setDeletingId(_id)
 		axios
-			.delete(`/api/delete_client/${_id}`)
+			.delete(`/api/delete/${_id}`)
 			.then(() => {
 				WebApp.showAlert('Запись успешно отменена', [router.push('/')])
 			})
