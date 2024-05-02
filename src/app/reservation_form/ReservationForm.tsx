@@ -46,7 +46,21 @@ const ReservationForm = () => {
 	const [userId, setUserId] = useState()
 	const WebApp = useWebApp()
 
-	const [currentMaster, setCurrentMaster] = useState<IMasters>()
+	const [currentMaster, setCurrentMaster] = useState<SafeMaster | null>(null)
+
+	useEffect(() => {
+		const getMaster = async () => {
+			try {
+				const response = await axios.get('/api/master')
+				const masterData = response.data
+				setCurrentMaster(masterData)
+			} catch (error) {
+				console.error('Failed to fetch master:', error)
+			}
+		}
+
+		getMaster()
+	}, [])
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
