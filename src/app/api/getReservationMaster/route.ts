@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
 	const url = new URL(request.url)
 	const masterId = url.searchParams.get('masterId')
+	console.log(masterId)
 
 	if (!masterId) {
 		return NextResponse.error()
