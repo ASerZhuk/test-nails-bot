@@ -16,7 +16,7 @@ export default async function handler(request: NextApiRequest) {
 
 	try {
 		const id = masterId.toString()
-		const reservations = await Reservation.findOne({ masterId: id })
+		const reservations = await Reservation.find()
 		return NextResponse.json(reservations)
 	} catch (error) {
 		console.error('Failed to fetch reservations:', error)
