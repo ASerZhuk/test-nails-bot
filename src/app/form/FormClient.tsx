@@ -18,12 +18,27 @@ import AvatarUpload from '../components/UploadAvatar'
 import { Checkbox } from 'antd'
 import { IMasters } from '../models/Master'
 
-interface FormClientProps {
-	currentMaster?: SafeMaster | null
-}
-
-const FormClient: React.FC<FormClientProps> = ({ currentMaster }) => {
+const FormClient = () => {
 	const router = useRouter()
+
+	const [currentMaster, setCurrentMaster] = useState<SafeMaster>()
+	useEffect(() => {
+		const getMaster = async () => {
+			try {
+				const response = await axios.get('/api/master', {
+					params: { isMaster: true },
+				})
+				setCurrentMaster(response.data)
+			} catch (error) {
+				console.error('Failed to fetch master:', error)
+			}
+		}
+
+		if (!currentMaster) {
+			getMaster()
+		}
+	}, [])
+
 	const [isLoading, setIsLoading] = useState(false)
 	const [formData, setFormData] = useState({
 		firstName: `${currentMaster?.firstName}`,

@@ -5,19 +5,13 @@ import Masters from '@/app/models/Master'
 import axios from 'axios'
 
 const Home = async () => {
-	try {
-		const response = await axios.post('/api/master', { isMaster: true })
-		const data = response.data
-		return (
-			<>
-				<Container>
-					<Main currentMaster={data} />
-				</Container>
-			</>
-		)
-	} catch (error) {
-		console.error('Failed to fetch master:', error)
-	}
+	return (
+		<>
+			<Container>
+				<Main />
+			</Container>
+		</>
+	)
 }
 
 export default Home
