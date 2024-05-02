@@ -11,8 +11,9 @@ export async function GET(request: Request) {
 	}
 
 	try {
+		const id = masterId.toString()
 		const reservations = await Reservation.find({
-			masterId: masterId.toString(),
+			masterId: id,
 		})
 		return NextResponse.json(reservations)
 	} catch (error) {
