@@ -2,15 +2,20 @@ import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
-	const masterId = request.url.split('?')[1]?.split('=')[1]
+	const url = new URL(request.url)
+	const masterId = url.searchParams.get('masterId')
 
 	if (!masterId) {
 		return NextResponse.error()
 	}
 
-	const reservations = await Reservation.find({
-		masterId: masterId.toString(),
-	})
-
-	return NextResponse.json(reservations)
+	try {
+		const reservations = await Reservation.find({
+			masterId: masterId.toString(),
+		})
+		return NextResponse.json(reservations)
+	} catch (error) {
+		console.error('Failed to fetch reservations:', error)
+		return NextResponse.error()
+	}
 }

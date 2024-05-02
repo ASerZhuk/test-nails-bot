@@ -42,7 +42,7 @@ const AppointmentMaster = () => {
 		const getReservationClient = async () => {
 			try {
 				const response = await axios.get(
-					`/api/getMasterReservation?masterId=${masterId}`
+					`/api/getReservationMaster?masterId=${masterId}`
 				)
 				const reservationsData = response.data
 				setReservations(reservationsData)
