@@ -7,7 +7,7 @@ export default async function handler(request: NextApiRequest) {
 		return NextResponse.error()
 	}
 
-	const url = new URL(request.url || '')
+	const url = new URL(request.url || '', process.env.NEXT_PUBLIC_API_BASE_URL)
 	const masterId = url.searchParams.get('masterId')
 
 	if (!masterId) {
