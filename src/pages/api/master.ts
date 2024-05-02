@@ -1,3 +1,4 @@
+import dbConnect from '@/app/libs/dbConnect'
 import Masters from '@/app/models/Master'
 import { NextApiResponse, NextApiRequest } from 'next'
 
@@ -5,6 +6,7 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
+	await dbConnect()
 	if (req.method === 'GET') {
 		try {
 			const master = await Masters.findOne({})
