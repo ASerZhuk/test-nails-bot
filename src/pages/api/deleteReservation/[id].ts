@@ -10,6 +10,7 @@ export default async function handler(
 		await dbConnect()
 		try {
 			const { reservationId } = req.query
+			console.log(reservationId)
 
 			// Проверяем наличие идентификатора резервации
 			if (!reservationId || typeof reservationId !== 'string') {
@@ -17,7 +18,7 @@ export default async function handler(
 			}
 
 			// Удаляем резервацию по идентификатору
-			const deletedReservation = await Reservation.findByIdAndDelete({
+			const deletedReservation = await Reservation.deleteOne({
 				_id: reservationId,
 			})
 
