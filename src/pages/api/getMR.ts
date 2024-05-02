@@ -1,25 +1,22 @@
+import dbConnect from '@/app/libs/dbConnect'
+
 import Reservation from '@/app/models/Reservation'
-import { NextResponse } from 'next/server'
-import { NextApiRequest } from 'next'
+import { NextApiResponse, NextApiRequest } from 'next'
 
-export default async function handler(request: NextApiRequest) {
-	if (request.method !== 'GET') {
-		return NextResponse.error()
-	}
-
-	const url = new URL(request.url || '', process.env.NEXT_PUBLIC_API_BASE_URL)
-	const masterId = url.searchParams.get('masterId')
-
-	if (!masterId) {
-		return NextResponse.error()
-	}
-
-	try {
-		const id = masterId.toString()
-		const reservations = await Reservation.findOne({})
-		return NextResponse.json(reservations)
-	} catch (error) {
-		console.error('Failed to fetch reservations:', error)
-		return NextResponse.error()
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse
+) {
+	await dbConnect()
+	if (req.method === 'GET') {
+		try {
+			const reservations = await Reservation.findOne({})
+			return res.status(200).json(reservations)
+		} catch (error) {
+			console.error('Failed to fetch reservations:', error)
+			return res.status(500).json({ error: 'Failed to fetch reservations' })
+		}
+	} else {
+		return res.status(405).json({ error: 'Method Not Allowed' })
 	}
 }
