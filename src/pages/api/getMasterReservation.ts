@@ -1,9 +1,10 @@
+import dbConnect from '@/app/libs/dbConnect'
 import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
-	const params = new URLSearchParams(request.url.split('?')[1])
-	const masterId = params.get('masterId')
+export default async function handler(request: Request) {
+	await dbConnect()
+	const masterId = request.url.split('?')[1]?.split('=')[1]
 
 	if (!masterId) {
 		return NextResponse.error()
