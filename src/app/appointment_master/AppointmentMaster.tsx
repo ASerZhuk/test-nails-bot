@@ -41,9 +41,7 @@ const AppointmentMaster = () => {
 	useEffect(() => {
 		const getReservationClient = async () => {
 			try {
-				const response = await axios.get(
-					`/api/getReservationMaster?masterId=${masterId}`
-				)
+				const response = await axios.get(`/api/getMR?masterId=${masterId}`)
 				const reservationsData = response.data
 				setReservations(reservationsData)
 			} catch (error) {
