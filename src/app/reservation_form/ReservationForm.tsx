@@ -141,20 +141,6 @@ const ReservationForm = () => {
 		}
 	}
 
-	useEffect(() => {
-		const getMaster = async () => {
-			try {
-				const response = await axios.post(`/api/master`)
-				const masterData = response.data
-				setCurrentMaster(masterData)
-			} catch (error) {
-				console.error('Failed to fetch master:', error)
-			}
-		}
-
-		getMaster()
-	}, [])
-
 	const handleTimeSlotSelect = (timeSlot: string) => {
 		setSelectedTimeSlot(timeSlot)
 	}
