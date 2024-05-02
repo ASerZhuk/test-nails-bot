@@ -10,7 +10,7 @@ export default async function handler(
 	await dbConnect()
 	if (req.method === 'GET') {
 		try {
-			const reservations = await Reservation.findOne({})
+			const reservations = await Reservation.find({})
 			return res.status(200).json(reservations)
 		} catch (error) {
 			console.error('Failed to fetch reservations:', error)
