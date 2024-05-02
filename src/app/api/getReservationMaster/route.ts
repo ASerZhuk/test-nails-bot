@@ -2,7 +2,8 @@ import Reservation from '@/app/models/Reservation'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
-	const masterId = request.url.split('?')[1]?.split('=')[1]
+	const params = new URLSearchParams(request.url.split('?')[1])
+	const masterId = params.get('masterId')
 
 	if (!masterId) {
 		return NextResponse.error()
