@@ -12,6 +12,7 @@ export default async function handler(
 		try {
 			const { userId } = req.query
 			const id = userId?.toString()
+			console.log(id)
 
 			const reservations = await Reservation.find({
 				userId: id,
