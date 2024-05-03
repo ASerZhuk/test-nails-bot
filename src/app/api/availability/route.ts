@@ -27,13 +27,9 @@ export async function POST(request: Request) {
 	)
 	const resultbookedTimes = bookedTimes.flat()
 
-	const times = resultTimings.filter(
-		(item: any) => !resultbookedTimes.includes(item)
+	const availableTimes = resultTimings.filter(
+		(time: any) => !resultbookedTimes.includes(time)
 	)
 
-	if (times.length === 0) {
-		return NextResponse.json(resultTimings)
-	} else {
-		return NextResponse.json(times)
-	}
+	return NextResponse.json(availableTimes)
 }

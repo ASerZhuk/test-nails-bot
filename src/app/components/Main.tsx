@@ -58,6 +58,10 @@ const Main = () => {
 		getMaster()
 	}, [])
 
+	if (!currentMaster) {
+		return <Spin size='large' />
+	}
+
 	return (
 		<>
 			<div className='flex flex-col items-center'>
