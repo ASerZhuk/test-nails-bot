@@ -63,19 +63,11 @@ export default async function handler(req, res) {
 				if (user.isMaster) {
 					inlineKeyboard.push([
 						{ text: 'Мой профиль', web_app: { url: webAppUrl } },
-						{
-							text: 'Запись ко мне',
-							web_app: { url: `${webAppUrl}/appointment_master` },
-						},
 					])
 				} else {
 					// Если пользователь не мастер, добавляем кнопку "Мои записи"
 					inlineKeyboard.push([
 						{ text: 'Записаться', web_app: { url: webAppUrl } },
-						{
-							text: 'Мои записи',
-							web_app: { url: `${webAppUrl}/appointment_client` },
-						},
 					])
 				}
 
