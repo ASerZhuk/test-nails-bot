@@ -20,7 +20,7 @@ const AppointmentClient = () => {
 		(_id: string) => {
 			setDeletingId(_id)
 			axios
-				.delete(`/api/delete_client/${_id}`)
+				.delete(`/api/deleteReservation/${_id}`)
 				.then(() => {
 					WebApp.showAlert('Запись успешно отменена', [router.push('/')])
 				})
