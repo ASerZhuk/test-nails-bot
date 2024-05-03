@@ -43,8 +43,7 @@ export default async function handler(
 
 			await bot.sendMessage(
 				master_chat,
-				`❌ Запись отменена ❌\n\n 😀 Клиент: ${reservation.firstName} ${reservation.lastName} 📆 Дата: ${reservation.date} \n 
-			⌚ Время: ${reservation.time}`
+				`❌ Запись отменена ❌\n\n😀 Клиент: ${reservation.firstName} ${reservation.lastName}\n📆 Дата: ${reservation.date}\n⌚ Время: ${reservation.time}`
 			)
 
 			return res.status(200).json(deletedReservation)
