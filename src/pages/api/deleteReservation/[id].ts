@@ -36,7 +36,8 @@ export default async function handler(
 
 			await bot.sendMessage(
 				user_chat,
-				`🎉 Запись отменена 🎉\n\n  📆 Дата: ${reservation.date} \n ⌚ Время: ${reservation.times}`
+				`🎉 Запись отменена 🎉\n\n  📆 Дата: ${reservation.date} \n 
+				⌚ Время: ${reservation.time}`
 			)
 
 			return res.status(200).json(deletedReservation)
