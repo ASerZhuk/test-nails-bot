@@ -117,7 +117,7 @@ const ReservationForm = () => {
 				userId,
 			})
 			.then(() => {
-				WebApp.showAlert('Запись прошла успешно', [router.push('/')])
+				WebApp.showAlert('Запись прошла успешно', [WebApp.close()])
 				reset()
 			})
 	}
