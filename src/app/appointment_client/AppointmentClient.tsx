@@ -40,9 +40,7 @@ const AppointmentClient = () => {
 	useEffect(() => {
 		const getReservationClient = async () => {
 			try {
-				const response = await axios.get(
-					`/api/getReservationClient?userId=${userId}`
-				)
+				const response = await axios.get(`/api/getCR?${userId}`)
 				const reservationsData = response.data
 				setReservations(reservationsData)
 			} catch (error) {
