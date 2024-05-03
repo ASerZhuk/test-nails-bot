@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 		return NextResponse.error()
 	}
 
-	const master = await Masters.find({
+	const master = await Masters.findOne({
 		userId: userId,
 	})
 
