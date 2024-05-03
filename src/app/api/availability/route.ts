@@ -10,9 +10,7 @@ export async function POST(request: Request) {
 		return NextResponse.error()
 	}
 
-	const master = await Masters.findOne({
-		userId: userId,
-	})
+	const master = await Masters.findOne({})
 
 	const timings = master.map((timing: { slotTime: any }) => timing.slotTime)
 	const resultTimings = timings.flat()
