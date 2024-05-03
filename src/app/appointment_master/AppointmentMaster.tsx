@@ -17,9 +17,8 @@ const AppointmentMaster = () => {
 	const [deletingId, setDeletingId] = useState('')
 	const WebApp = useWebApp()
 
-	const onCancel = (_id: string) => {
-		setDeletingId(_id)
-		axios
+	const onCancel = async (_id: string) => {
+		await axios
 			.delete(`/api/deleteReservation/${_id}`)
 			.then(() => {
 				WebApp.showAlert('Запись успешно отменена', [router.push('/')])
