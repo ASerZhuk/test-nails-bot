@@ -127,7 +127,7 @@ const ReservationForm = () => {
 
 		if (date) {
 			try {
-				const response = await axios.post('/api/availability', {
+				const response = await axios.post('/api/availableTime', {
 					date: date?.toLocaleDateString('ru-RU'),
 
 					userId: currentMaster?.userId,
