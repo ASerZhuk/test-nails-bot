@@ -22,7 +22,7 @@ const AppointmentClient = () => {
 			axios
 				.delete(`/api/deleteReservation/${_id}`)
 				.then(() => {
-					WebApp.showAlert('Запись успешно отменена', [router.push('/')])
+					WebApp.showAlert('Запись успешно отменена', [WebApp.close()])
 				})
 				.finally(() => {
 					setDeletingId('')

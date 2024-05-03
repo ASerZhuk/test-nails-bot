@@ -25,6 +25,7 @@ export default async function handler(
 			})
 
 			const user_chat = parseInt(reservation.userId)
+			const master_chat = parseInt(reservation.masterId)
 
 			const deletedReservation = await Reservation.deleteOne({
 				_id: reservationId,
@@ -36,8 +37,14 @@ export default async function handler(
 
 			await bot.sendMessage(
 				user_chat,
-				`🎉 Запись отменена 🎉\n\n  📆 Дата: ${reservation.date} \n 
-				⌚ Время: ${reservation.time}`
+				`❌ Запись отменена ❌\n\n 📆 Дата: ${reservation.date} \n 
+			⌚ Время: ${reservation.time}`
+			)
+
+			await bot.sendMessage(
+				master_chat,
+				`❌ Запись отменена ❌\n\n 😀 Клиент: ${reservation.firstName} ${reservation.lastName} 📆 Дата: ${reservation.date} \n 
+			⌚ Время: ${reservation.time}`
 			)
 
 			return res.status(200).json(deletedReservation)

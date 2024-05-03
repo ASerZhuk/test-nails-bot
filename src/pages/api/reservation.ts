@@ -30,12 +30,12 @@ export default async function handler(
 
 			await bot.sendMessage(
 				master_chat,
-				`🎉 У Вас новая запись 🎉\n\n 😀 ${firstName} ${lastName} \n 📆 Дата: ${date} \n ⌚ Время: ${times} \n  📞 Телефон: ${phone} \n 💰 К оплате: ${price} руб.`
+				`✔️ У Вас новая запись ✔️\n\n 😀 ${firstName} ${lastName} \n 📆 Дата: ${date} \n ⌚ Время: ${times} \n  📞 Телефон: ${phone} \n 💰 К оплате: ${price} руб.`
 			)
 
 			await bot.sendMessage(
 				user_chat,
-				`🎉 Вы записались 🎉\n\n 😀 Мастер: ${master?.firstName} ${master?.lastName} \n 📞 Телефон: ${master?.phone} \n 📆 Дата: ${date} \n ⌚ Время: ${times} \n 💰 К оплате: ${master?.price} руб.`
+				`✔️ Вы записались ✔️\n\n 😀 Мастер: ${master?.firstName} ${master?.lastName} \n 📞 Телефон: ${master?.phone} \n 📆 Дата: ${date} \n ⌚ Время: ${times} \n 💰 К оплате: ${master?.price} руб.`
 			)
 
 			return res.status(200).json(reservation)
