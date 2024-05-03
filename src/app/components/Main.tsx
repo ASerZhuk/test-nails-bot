@@ -46,7 +46,7 @@ const Main = () => {
 	}
 
 	useEffect(() => {
-		const getReservationClient = async () => {
+		const getMaster = async () => {
 			try {
 				const response = await axios.get('/api/master')
 				const masterData = response.data
@@ -55,7 +55,7 @@ const Main = () => {
 				console.error('Failed to fetch master:', error)
 			}
 		}
-		getReservationClient()
+		getMaster()
 	}, [])
 
 	return (
