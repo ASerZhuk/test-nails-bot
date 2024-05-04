@@ -193,13 +193,24 @@ const FormClient = () => {
 					required
 				/>
 
+				<div
+					className='text-sm'
+					style={{ color: 'var(--tg-theme-text-color)' }}
+				>
+					Выходные дни:
+				</div>
+
 				<Checkbox.Group
 					options={options}
 					value={selectedDays}
 					onChange={checkedValues => setValue('selectedDays', checkedValues)}
 				>
 					{options.map(option => (
-						<Checkbox key={option.value} value={option.value}>
+						<Checkbox
+							style={{ color: 'var(--tg-theme-text-color)' }}
+							key={option.value}
+							value={option.value}
+						>
 							{option.label}
 						</Checkbox>
 					))}
