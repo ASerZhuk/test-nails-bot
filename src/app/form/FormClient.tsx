@@ -15,8 +15,8 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import AvatarUpload from '../components/UploadAvatar'
 
-import { Checkbox, ConfigProvider, theme } from 'antd'
-import { IMasters } from '../models/Master'
+import { Checkbox,  Spin, } from 'antd'
+
 
 const FormClient = () => {
 	const router = useRouter()
@@ -105,16 +105,36 @@ const FormClient = () => {
 	const options = [
 		{
 			label: (
-				<div style={{ color: 'var(--tg-theme-text-color)' }}>'Понедельник'</div>
+				<div style={{ color: 'var(--tg-theme-text-color)' }}>Понедельник</div>
 			),
 			value: 1,
 		},
-		{ label: 'Вторник', value: 2 },
-		{ label: 'Среда', value: 3 },
-		{ label: 'Четверг', value: 4 },
-		{ label: 'Пятница', value: 5 },
-		{ label: 'Суббота', value: 6 },
-		{ label: 'Воскресенье', value: 0 },
+		{
+			label: <div style={{ color: 'var(--tg-theme-text-color)' }}>Вторник</div>,
+			value: 2,
+		},
+		{
+			label: <div style={{ color: 'var(--tg-theme-text-color)' }}>Среда</div>,
+			value: 3,
+		},
+		{
+			label: <div style={{ color: 'var(--tg-theme-text-color)' }}>Четверг</div>,
+			value: 4,
+		},
+		{
+			label: <div style={{ color: 'var(--tg-theme-text-color)' }}>Пятница</div>,
+			value: 5,
+		},
+		{
+			label: <div style={{ color: 'var(--tg-theme-text-color)' }}>Суббота</div>,
+			value: 6,
+		},
+		{
+			label: (
+				<div style={{ color: 'var(--tg-theme-text-color)' }}>Воскресенье</div>
+			),
+			value: 0,
+		},
 	]
 
 	useEffect(() => {
@@ -124,6 +144,10 @@ const FormClient = () => {
 	}, [formData])
 
 	useEffect(() => {}, [])
+
+	if (!currentMaster) {
+		return <Spin size='large' />
+	}
 
 	return (
 		<>
