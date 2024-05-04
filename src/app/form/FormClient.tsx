@@ -15,7 +15,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import AvatarUpload from '../components/UploadAvatar'
 
-import { Checkbox } from 'antd'
+import { Checkbox, ConfigProvider, theme } from 'antd'
 import { IMasters } from '../models/Master'
 
 const FormClient = () => {
@@ -103,7 +103,12 @@ const FormClient = () => {
 	}
 
 	const options = [
-		{ label: 'Понедельник', value: 1 },
+		{
+			label: (
+				<div style={{ color: 'var(--tg-theme-text-color)' }}>'Понедельник'</div>
+			),
+			value: 1,
+		},
 		{ label: 'Вторник', value: 2 },
 		{ label: 'Среда', value: 3 },
 		{ label: 'Четверг', value: 4 },
@@ -207,9 +212,7 @@ const FormClient = () => {
 				>
 					{options.map(option => (
 						<Checkbox key={option.value} value={option.value}>
-							<div style={{ color: 'var(--tg-theme-text-color)' }}>
-								{option.label}
-							</div>
+							{option.label}
 						</Checkbox>
 					))}
 				</Checkbox.Group>
