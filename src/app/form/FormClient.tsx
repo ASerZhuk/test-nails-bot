@@ -206,12 +206,10 @@ const FormClient = () => {
 					onChange={checkedValues => setValue('selectedDays', checkedValues)}
 				>
 					{options.map(option => (
-						<Checkbox
-							style={{ color: 'var(--tg-theme-text-color)' }}
-							key={option.value}
-							value={option.value}
-						>
-							{option.label}
+						<Checkbox key={option.value} value={option.value}>
+							<div style={{ color: 'var(--tg-theme-text-color)' }}>
+								{option.label}
+							</div>
 						</Checkbox>
 					))}
 				</Checkbox.Group>
