@@ -9,13 +9,18 @@ import { BsWatch } from 'react-icons/bs'
 import { GrMoney } from 'react-icons/gr'
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdPhoneAndroid } from 'react-icons/md'
+import { DatePicker, Space } from 'antd'
+import locale from 'antd/es/date-picker/locale/ru_RU'
 
 const AppointmentMaster = () => {
 	const router = useRouter()
 	const [masterId, setMasterId] = useState<string>()
 	const [reservations, setReservations] = useState<any[]>([])
 	const [deletingId, setDeletingId] = useState('')
+	const [selectedDate, setSelectedDate] = useState<string | null>(null)
 	const WebApp = useWebApp()
+
+	console.log(selectedDate?.toLocaleString())
 
 	const onCancel = async (_id: string) => {
 		await axios
@@ -31,7 +36,7 @@ const AppointmentMaster = () => {
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
 		const id = tg?.initDataUnsafe.user?.id
-		setMasterId(id.toString())
+		setMasterId(id?.toString())
 	}, [])
 
 	useEffect(() => {
@@ -49,6 +54,15 @@ const AppointmentMaster = () => {
 		}
 	}, [masterId])
 
+	const handleDateChange = (date: any, dateString: string | string[]) => {
+		setSelectedDate(Array.isArray(dateString) ? dateString[0] : dateString)
+	}
+
+	const filteredReservations = selectedDate
+		? reservations.filter(reservation => reservation.date === selectedDate)
+		: reservations
+
+	const res = [...filteredReservations].reverse()
 	return (
 		<>
 			<BackButton onClick={() => router.push('/')} />
@@ -64,8 +78,28 @@ const AppointmentMaster = () => {
 				className='mt-8'
 				style={{ borderColor: 'var(--tg-theme-secondary-bg-color)' }}
 			/>
+			<div className='flex items-center gap-4 mt-6'>
+				<div
+					className='mt-2 text-md'
+					style={{ color: 'var(--tg-theme-text-color)' }}
+				>
+					Сортировка по дате
+				</div>
+				<Space direction='vertical'>
+					<DatePicker
+						locale={locale}
+						onChange={handleDateChange}
+						format={'DD.MM.YYYY'}
+					/>
+				</Space>
+			</div>
+
+			<hr
+				className='mt-8'
+				style={{ borderColor: 'var(--tg-theme-secondary-bg-color)' }}
+			/>
 			<div>
-				{reservations.map((reservation, index) => (
+				{res.map((reservation, index) => (
 					<>
 						<div
 							key={index}
