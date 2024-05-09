@@ -52,6 +52,8 @@ const AppointmentClient = () => {
 		}
 	}, [userId])
 
+	const filterReservation = [...reservations].reverse()
+
 	return (
 		<>
 			<BackButton onClick={() => router.push('/')} />
@@ -69,7 +71,7 @@ const AppointmentClient = () => {
 				style={{ borderColor: 'var(--tg-theme-secondary-bg-color)' }}
 			/>
 			<div>
-				{reservations.map((reservation, index) => (
+				{filterReservation.map((reservation, index) => (
 					<>
 						<div
 							key={index}
